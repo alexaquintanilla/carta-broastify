@@ -141,7 +141,18 @@ main{padding:26px 24px 8px}
   position:relative;width:100%;height:215px;border-radius:var(--r);overflow:hidden;flex:none;
   box-shadow:0 10px 26px -16px rgba(60,30,0,.55);border:3px solid #fff;
 }
-.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.photo::after{
+  content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:
+    linear-gradient(to top,rgba(45,20,0,.34),transparent 46%),
+    radial-gradient(120% 80% at 50% 6%,rgba(255,184,92,.20),transparent 56%);
+}
+.photo img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:1;
+  filter:saturate(1.1) contrast(1.05) brightness(1.02);
+  transition:transform .55s cubic-bezier(.2,.7,.2,1);
+}
+@media(hover:hover){.photo:hover img{transform:scale(1.06)}}
 
 .list{list-style:none;display:flex;flex-direction:column}
 .item{padding:9px 8px;border-bottom:1px solid var(--hair);border-radius:8px;transition:background .15s ease}
@@ -228,6 +239,8 @@ main{padding:26px 24px 8px}
   .course__body{flex-direction:row;align-items:stretch;gap:14px}
   .course--rev .course__body{flex-direction:row-reverse}
   .photo{width:180px;height:auto;min-height:116px;align-self:stretch;border-width:2px}
+  .photo::after{display:none}
+  .photo img{filter:saturate(1.06) contrast(1.03);transform:none!important}
   .split .photo{width:118px;min-height:98px}
   .item{padding:5px 6px}
   .item__name{font-size:16.5px}
